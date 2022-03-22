@@ -1,0 +1,53 @@
+<html>  
+<head>  
+<script>  
+var request;  
+function sendInfo()  
+{  
+var v=document.getElementById('t1').value; //state ke name ayee ge v me
+var url="state.jsp?state="+v;  
+  
+if(window.XMLHttpRequest){  
+request=new XMLHttpRequest();  
+}  
+else if(window.ActiveXObject){  
+request=new ActiveXObject("Microsoft.XMLHTTP");  
+}  
+  
+try  
+{  
+request.onreadystatechange=getInfo;  
+request.open("GET",url,true);  
+request.send();  
+}  
+catch(e)  
+{  
+alert("Unable to connect to server");  
+}  
+}  
+  
+function getInfo(){  
+if(request.readyState==4){  
+var val=request.responseText;  
+document.getElementById('amit').innerHTML=val;  
+}  
+}  
+  
+</script>  
+</head>  
+<body onload="sendInfo()">  
+<form >  
+<label>State:</label>
+<select id="t1" onchange="sendInfo()" >
+<option>Mp</option>
+<option>Maharashtra</option>
+<option>ap</option>
+<option>Bihar</option>
+<option>hp</option>
+</select>    
+</form>  
+ 
+City:<select id="amit"> </select>  
+  
+</body>  
+</html>  

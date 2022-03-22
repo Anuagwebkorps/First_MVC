@@ -1,0 +1,49 @@
+<!-- ajax ka code he humne liya he  search.jsp ka response val me aee gaa-->
+
+<html>  
+<head>  
+<script>  
+var request;  
+function sendInfo()  
+{  
+var v=document.getElementById('t1').value;  //jobhi input field me hum type kere ge uski value =v me aajaye gii
+var url="search.jsp?name="+v;  
+  
+if(window.XMLHttpRequest){  //XMLHttpRequest object can be used to exchange data with a web server behind the scenes.
+request=new XMLHttpRequest();  
+}  
+else if(window.ActiveXObject){  
+request=new ActiveXObject("Microsoft.XMLHTTP");  
+}  
+  
+try  
+{  
+request.onreadystatechange=getInfo; //onreadystatechange state 4 hoti he jabh hum url me kuch nahi hota jabj [0] phir jabh server ke pass jati he jabh [1] phir toda data fect hota he jabh [3] or jabh finnaly pura data fecth ho jata he jabh [4] .puri table hume 4 per hi show hogiii.
+request.open("GET",url,true);  
+request.send();  
+}  
+catch(e)  
+{  
+alert("Unable to connect to server");  
+}  
+}  
+  
+function getInfo(){  
+if(request.readyState==4){  
+var val=request.responseText;  
+document.getElementById('amit').innerHTML=val;  
+}  
+}  
+  
+</script>  
+</head>  
+<body onload="sendInfo()">  
+<form >  
+Search<input type="text" name="t1" id="t1" onkeyup="sendInfo()" />    
+</form>  
+ <h1>before div</h1>
+ <h4>update parts of a web page, without reloading the whole page.</h4>
+<div id="amit"> </div>  
+ <h1>after div</h1> 
+</body>  
+</html>  

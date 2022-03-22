@@ -1,0 +1,45 @@
+<html>  
+<head>  
+<script>  
+var request;  
+function sendInfo()  
+{  
+var v=document.getElementById('t1').value;  
+var url="student.jsp?name="+v;  //3
+  
+if(window.XMLHttpRequest){  
+request=new XMLHttpRequest();  
+}  
+else if(window.ActiveXObject){  
+request=new ActiveXObject("Microsoft.XMLHTTP");  
+}  
+  
+try  
+{  
+request.onreadystatechange=getInfo;  
+request.open("GET",url,true);  
+request.send();  
+}  
+catch(e)  
+{  
+alert("Unable to connect to server");  
+}  
+}  
+  
+function getInfo(){  //output internal AJAX ke through aa jata he getInfo() me
+if(request.readyState==4){  
+var val=request.responseText;  
+document.getElementById('amit').innerHTML=val;  
+}  
+}  
+  
+</script>  
+</head>  
+<body onload="sendInfo()">  
+<form action="AddProduct.jsp">  
+<input type="number" name="t1" id="t1" onkeyup="sendInfo()" />
+<div id="amit"> </div>     
+<h3 style="background-color:skyblue;">I am addpro.html</h3>
+</form>  
+</body>  
+</html>  
